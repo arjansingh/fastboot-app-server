@@ -161,6 +161,10 @@ class FastBootAppServer {
       this.forkWorker();
     });
 
+    worker.on('error', error => {
+      this.ui.writeError(err);
+    })
+
     return new Promise(resolve => {
       this.ui.writeLine('worker online');
       worker.on('message', message => {
